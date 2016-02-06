@@ -1,0 +1,15 @@
+{
+  "dbuser":"wmmaster",
+  "dbpassword":"wmmaster123",
+  "dbaddress":"localhost",
+  "dbname":"patient",
+  "user":"root",
+  "password":"yubitatefuse",
+  "sessionkey":"Daisy, Daisy.",
+  "sessionName":"wmonsin",
+  "key1":"Yes We therefore I think we",
+  "key2":"Man is a thinking reed",
+  "key3":"KEY4",
+  "state":"development",
+  "loglevel":"TRACE"
+}
