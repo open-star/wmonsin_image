@@ -1,1 +1,1 @@
-db.createUser({ user: "oda", pwd: "zz0101", roles: ["readWrite", "dbOwner"] });
+db.createUser({user:"wmmaster", pwd:"wmmaster123", roles:[ "readWrite", "dbOwner" ]});
