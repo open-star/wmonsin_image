@@ -4,168 +4,210 @@
  This software is released under the MIT License.
  http://opensource.org/licenses/mit-license.php
  */
+
 'use strict';
-function alert_log(obj, name) {
+
+declare function require(x:string):any;
+
+function alert_log(obj:any, name:string):void {
     if (obj) {
         logger.info(name + ' Ok.');
-    }
-    else {
+    } else {
         logger.fatal(name + ' NG.');
     }
 }
+
 var express = require('express');
 var emitter = require('events').EventEmitter;
+
 var fs = require('fs');
+
 var text = fs.readFileSync('config/config.json', 'utf-8');
 var config = JSON.parse(text);
+
 var log4js = require('log4js');
 log4js.configure("config/logs.json");
 var logger = log4js.getLogger('request');
 logger.setLevel(config.loglevel);
-alert_log(express, 'express');
-alert_log(emitter, 'emitter');
+
+alert_log(express,'express');
+alert_log(emitter,'emitter');
+
 var mongoose = require('mongoose');
-alert_log(mongoose, 'mongoose');
+alert_log(mongoose,'mongoose');
+
 var Grid = require('gridfs-stream');
-alert_log(Grid, 'Grid');
+alert_log(Grid,'Grid');
+
 var _ = require('lodash');
-alert_log(_, 'lodash');
-alert_log(fs, 'fs');
-alert_log(config, 'config');
+alert_log(_,'lodash');
+
+alert_log(fs,'fs');
+alert_log(config,'config');
+
 config.dbaddress = process.env.DB_PORT_27017_TCP_ADDR || config.dbaddress;
 if (config.dbaddress) {
     logger.info('config.dbaddress : ' + config.dbaddress);
-}
-else {
+} else {
     logger.fatal('config.dbaddress NG.');
 }
+
 var PatientModel = require('./../model/patient');
-alert_log(PatientModel, 'PatientModel');
+alert_log(PatientModel,'PatientModel');
+
+
 var AccountModel = require('./../model/account');
-alert_log(AccountModel, 'AccountModel');
+alert_log(AccountModel,'AccountModel');
+
 var ViewModel = require('./../model/view');
-alert_log(ViewModel, 'ViewModel');
+alert_log(ViewModel,'ViewModel');
+
 var FileModel = require('./../model/file');
-alert_log(FileModel, 'FileModel');
+alert_log(FileModel,'FileModel');
+
 var ToHtml = require('./lib/tohtml');
-alert_log(ToHtml, 'ToHtml');
+alert_log(ToHtml,'ToHtml');
+
 //var csurf = require('csurf');
 //var crypto = require("crypto");
+
 var passport = require('passport');
-alert_log(passport, 'passport');
+alert_log(passport,'passport');
+
+
 var router = express.Router();
+
 var Settings = require('./settings');
-alert_log(log4js, 'log4js');
+alert_log(log4js,'log4js');
+
 //var formatpdf = require('./lib/formatpdf');
 var result = require('./lib/result');
-alert_log(log4js, 'log4js');
+alert_log(log4js,'log4js');
+
 var AccountController = require('./controllers/account_controller');
-alert_log(AccountController, 'AccountController');
+alert_log(AccountController,'AccountController');
+
 var PatientController = require('./controllers/patient_controller');
-alert_log(log4js, 'log4js');
+alert_log(log4js,'log4js');
+
 var ViewController = require('./controllers/view_controller');
-alert_log(ViewController, 'ViewController');
+alert_log(ViewController,'ViewController');
+
 var FileController = require('./controllers/file_controller');
-alert_log(FileController, 'FileController');
+alert_log(FileController,'FileController');
+
 var PdfController = require('./controllers/pdf_controller');
-alert_log(PdfController, 'PdfController');
+alert_log(PdfController,'PdfController');
+
 var ConfigController = require('./controllers/config_controller');
-alert_log(ConfigController, 'ConfigController');
+alert_log(ConfigController,'ConfigController');
+
 var Wrapper = require('./lib/wrapper');
 var wrapper = new Wrapper;
-alert_log(wrapper, 'wrapper');
+alert_log(wrapper,'wrapper');
+
 var account_controller = new AccountController();
-alert_log(account_controller, 'account_controller');
+alert_log(account_controller,'account_controller');
+
 var partient_controller = new PatientController();
-alert_log(partient_controller, 'partient_controller');
+alert_log(partient_controller,'partient_controller');
+
 var view_controller = new ViewController();
-alert_log(view_controller, 'view_controller');
+alert_log(view_controller,'view_controller');
+
 var file_controller = new FileController();
-alert_log(file_controller, 'file_controller');
+alert_log(file_controller,'file_controller');
+
 var pdf_controller = new PdfController();
-alert_log(pdf_controller, 'pdf_controller');
+alert_log(pdf_controller,'pdf_controller');
+
 var config_controller = new ConfigController();
-alert_log(config_controller, 'config_controller');
+alert_log(config_controller,'config_controller');
+
 logger.info('Index.js Start.');
+
+
 //var emitter = require('socket.io-emitter')({ host: '127.0.0.1', port: 6379 });
 //non csrf
 //router.get('/', function (req, res, next) {
 //    res.render('/');
 //});
+
 //csrf
+
 module.exports = router;
+
 // init db data
 try {
     // root user
-    _.each(config.initusers, function (user) {
-        wrapper.FindOne(null, 1000, AccountModel, { username: user.user }, function (res, account) {
+
+    _.each(config.initusers, (user) => {
+        wrapper.FindOne(null, 1000, AccountModel, {username: user.user}, (res:any, account:any):void => {
             if (!account) {
                 logger.trace("Creating init user");
-                AccountModel.register(new AccountModel({ username: user.user, type: user.type }), user.password, function (error, account) {
-                    if (!error) {
-                        logger.trace("Created");
-                    }
-                    else {
-                        logger.trace("Error");
-                    }
-                });
+                AccountModel.register(new AccountModel({username: user.user, type: user.type}),
+                    user.password,
+                    function (error, account) {
+                        if (!error) {
+                            logger.trace("Created");
+                        } else {
+                            logger.trace("Error");
+                        }
+                    });
             }
         });
     });
+
     // init schema
-    var connection = "mongodb://" + config.dbuser + ":" + config.dbpassword + "@" + config.dbaddress + "/" + config.dbname;
+    var connection = "mongodb://" + config.dbuser + ":" + config.dbpassword +  "@" + config.dbaddress +  "/" + config.dbname;
+
     var conn = mongoose.createConnection(connection);
     if (conn) {
-        conn.once('open', function (error) {
+        conn.once('open', (error:any):void  => {
             if (!error) {
                 var gfs = Grid(conn.db, mongoose.mongo);
                 if (gfs) {
-                    conn.db.collection('fs.files', function (error, collection) {
+                    conn.db.collection('fs.files', (error:any, collection:any):void => {
                         if (!error) {
                             if (collection) {
-                                collection.findOne({ filename: "schema1.png" }, function (error, item) {
+                                collection.findOne({filename: "schema1.png"}, (error:any, item:any):void => {
                                     if (!error) {
                                         if (!item) {
                                             logger.trace("Creating init schema");
                                             var readstream = fs.createReadStream('public/images/schema1.png');
-                                            var writestream = gfs.createWriteStream({ filename: "schema1.png" });
+                                            var writestream = gfs.createWriteStream({filename: "schema1.png"});
                                             if (writestream) {
                                                 readstream.pipe(writestream);
-                                                writestream.on('close', function (file) {
+                                                writestream.on('close', (file:any):void => {
                                                     conn.db.close();
                                                     logger.trace("Created");
                                                 });
-                                            }
-                                            else {
+                                            } else {
                                                 logger.error("Created schema writestream");
                                             }
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         logger.error("Created schema find");
                                     }
                                 });
-                            }
-                            else {
+                            } else {
                                 logger.error("Created schema connection");
                             }
-                        }
-                        else {
+                        } else {
                             logger.error("Created schema collection");
                         }
                     });
-                }
-                else {
+                } else {
                     logger.error("Created schema gfs");
                 }
-            }
-            else {
+            } else {
                 logger.error("Created schema open");
             }
         });
     }
+
     // init view
-    ViewModel.count({}, function (counterror, count) {
+    ViewModel.count({}, (counterror:any, count:number):void => {
         if (!counterror) {
             if (count <= 0) {
                 logger.trace("Creating init View");
@@ -178,14 +220,14 @@ try {
                         logger.trace("Created init View");
                     });
                 });
+
                 var config = new Settings;
                 var views = config.initView.Views;
                 _.each(views, function (data, index) {
                     ev.emit("view", data);
                 });
             }
-        }
-        else {
+        } else {
             logger.error("count open");
         }
     });
@@ -193,6 +235,7 @@ try {
 catch (e) {
     logger.fatal("init");
 }
+
 /*
 function Cipher(name:any, pass:any):any {
     var cipher:any = crypto.createCipher('aes192', pass);
@@ -207,191 +250,238 @@ function DeCipher(name:any, password:any):any {
     return decrypted;
 }
 */
-router.get('/', function (req, res) {
-    res.render('index', { development: (config.state === "development") });
+
+router.get('/', (req:any, res:any):void => {
+    res.render('index', {development:(config.state === "development")});
 });
-router.get('/document/:id', function (req, res, next) {
-    PatientModel.findById(req.params.id, function (finderror, patient) {
+
+router.get('/document/:id', (req:any, res:any, next:any):void => {
+    PatientModel.findById(req.params.id, (finderror:any, patient:any):void => {
         if (!finderror) {
             if (patient) {
-                res.render('document/index', { patient: patient });
-            }
-            else {
+                res.render('document/index', {patient: patient});
+            } else {
                 logger.error("/document/:id 1");
                 next();
             }
-        }
-        else {
+        } else {
             logger.error("/document/:id 2");
             next();
         }
     });
 });
-router.get('/partials/logo', function (req, res, next) {
+
+router.get('/partials/logo', (req:any, res:any, next:Function):void => {
     res.render('partials/logo');
 });
-router.get('/backend/', function (req, res) {
-    res.render('backend/index', { development: (config.state === "development") });
+
+router.get('/backend/', (req:any, res:any):void => {
+    res.render('backend/index', {development: (config.state === "development")});
 });
-router.get('/backend/partials/patient/start', function (req, res) {
+
+router.get('/backend/partials/patient/start', (req:any, res:any):void => {
     res.render('backend/partials/patient/start');
 });
-router.get('/backend/partials/patient/patients', function (req, res) {
+
+router.get('/backend/partials/patient/patients', (req:any, res:any):void => {
     res.render('backend/partials/patient/patients');
 });
-router.get('/backend/partials/patient/description/:id', function (req, res, next) {
+
+router.get('/backend/partials/patient/description/:id', (req:any, res:any, next:any):void => {
     var id = req.params.id;
-    PatientModel.findById(id, function (error, patient) {
+    PatientModel.findById(id, (error:any, patient:any):void => {
         if (!error) {
             if (patient) {
-                res.render('backend/partials/patient/description', { patient: patient });
-            }
-            else {
+                res.render('backend/partials/patient/description', {patient: patient});
+            } else {
                 logger.error("/backend/partials/patient/description/:id 1");
                 next();
             }
-        }
-        else {
+        } else {
             logger.error("/backend/partials/patient/description/:id 2");
             next();
         }
     });
 });
-router.get('/backend/partials/patient/patientacceptdialog', function (req, res) {
+
+router.get('/backend/partials/patient/patientacceptdialog', (req:any, res:any):void => {
     res.render('backend/partials/patient/patientacceptdialog');
 });
-router.get('/backend/partials/patient/sheet', function (req, res) {
+
+router.get('/backend/partials/patient/sheet', (req:any, res:any):void => {
     res.render('backend/partials/patient/sheet');
 });
-router.get('/backend/partials/patient/totalsheet', function (req, res) {
+
+router.get('/backend/partials/patient/totalsheet', (req:any, res:any):void => {
     res.render('backend/partials/patient/totalsheet');
 });
-router.get('/backend/partials/patient/configsheet', function (req, res) {
+
+router.get('/backend/partials/patient/configsheet', (req:any, res:any):void => {
     res.render('backend/partials/patient/configsheet');
 });
+
 /*! partials */
-router.get('/backend/partials/account/accounts', function (req, res) {
+router.get('/backend/partials/account/accounts', (req:any, res:any):void => {
     res.render('backend/partials/account/accounts');
 });
-router.get('/backend/partials/account/logindialog', function (req, res) {
+
+router.get('/backend/partials/account/logindialog', (req:any, res:any):void => {
     res.render('backend/partials/account/logindialog');
 });
-router.get('/backend/partials/account/registerdialog', function (req, res) {
+
+router.get('/backend/partials/account/registerdialog', (req:any, res:any):void => {
     res.render('backend/partials/account/registerdialog');
 });
-router.get('/backend/partials/account/deletedialog', function (req, res) {
+
+router.get('/backend/partials/account/deletedialog', (req:any, res:any):void => {
     res.render('backend/partials/account/deletedialog');
 });
-router.get('/backend/partials/account/accountdialog', function (req, res) {
+
+router.get('/backend/partials/account/accountdialog', (req:any, res:any):void => {
     res.render('backend/partials/account/accountdialog');
 });
+
 /*! edit dialog */
-router.get('/backend/partials/edit/departmentcreatedialog', function (req, res) {
+router.get('/backend/partials/edit/departmentcreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/departmentcreatedialog');
 });
-router.get('/backend/partials/edit/departmentcopydialog', function (req, res) {
+
+router.get('/backend/partials/edit/departmentcopydialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/departmentcopydialog');
 });
-router.get('/backend/partials/edit/departmentdeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/departmentdeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/departmentdeletedialog');
 });
-router.get('/backend/partials/edit/pagecreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/pagecreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/pagecreatedialog');
 });
-router.get('/backend/partials/edit/pagedeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/pagedeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/pagedeletedialog');
 });
-router.get('/backend/partials/edit/item/text/textcreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/text/textcreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/text/textcreatedialog');
 });
-router.get('/backend/partials/edit/item/check/checkcreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/check/checkcreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/check/checkcreatedialog');
 });
-router.get('/backend/partials/edit/item/select/selectcreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/select/selectcreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/select/selectcreatedialog');
 });
-router.get('/backend/partials/edit/item/numeric/numericcreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/numeric/numericcreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/numeric/numericcreatedialog');
 });
-router.get('/backend/partials/edit/item/picture/picturecreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/picture/picturecreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/picture/picturecreatedialog');
 });
-router.get('/backend/partials/edit/item/button/buttoncreatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/button/buttoncreatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/button/buttoncreatedialog');
 });
-router.get('/backend/partials/edit/item/text/textupdatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/text/textupdatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/text/textupdatedialog');
 });
-router.get('/backend/partials/edit/item/check/checkupdatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/check/checkupdatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/check/checkupdatedialog');
 });
-router.get('/backend/partials/edit/item/select/selectupdatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/select/selectupdatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/select/selectupdatedialog');
 });
-router.get('/backend/partials/edit/item/numeric/numericupdatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/numeric/numericupdatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/numeric/numericupdatedialog');
 });
-router.get('/backend/partials/edit/item/picture/pictureupdatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/picture/pictureupdatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/picture/pictureupdatedialog');
 });
-router.get('/backend/partials/edit/item/button/buttonupdatedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/button/buttonupdatedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/button/buttonupdatedialog');
 });
-router.get('/backend/partials/edit/item/text/textdeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/text/textdeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/text/textdeletedialog');
 });
-router.get('/backend/partials/edit/item/check/checkdeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/check/checkdeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/check/checkdeletedialog');
 });
-router.get('/backend/partials/edit/item/select/selectdeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/select/selectdeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/select/selectdeletedialog');
 });
-router.get('/backend/partials/edit/item/numeric/numericdeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/numeric/numericdeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/numeric/numericdeletedialog');
 });
-router.get('/backend/partials/edit/item/picture/picturedeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/picture/picturedeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/picture/picturedeletedialog');
 });
-router.get('/backend/partials/edit/item/button/buttondeletedialog', function (req, res) {
+
+router.get('/backend/partials/edit/item/button/buttondeletedialog', (req:any, res:any):void => {
     res.render('backend/partials/edit/item/button/buttondeletedialog');
 });
+
 /* */
-router.get('/backend/partials/edit/departments', function (req, res) {
+router.get('/backend/partials/edit/departments', (req:any, res:any):void => {
     res.render('backend/partials/edit/departments');
 });
-router.get('/backend/partials/edit/department', function (req, res) {
+
+router.get('/backend/partials/edit/department', (req:any, res:any):void => {
     res.render('backend/partials/edit/department');
 });
+
 /* */
-router.get('/backend/partials/edit/page', function (req, res) {
+router.get('/backend/partials/edit/page', (req:any, res:any):void => {
     res.render('backend/partials/edit/page');
 });
-router.get('/backend/partials/edit/files', function (req, res) {
+
+router.get('/backend/partials/edit/files', (req:any, res:any):void => {
     res.render('backend/partials/edit/files');
 });
-router.get('/backend/partials/controll/notification', function (req, res) {
+
+router.get('/backend/partials/controll/notification', (req:any, res:any):void => {
     res.render('backend/partials/controll/notification');
 });
-router.get('/backend/partials/controll/panel', function (req, res) {
+
+router.get('/backend/partials/controll/panel', (req:any, res:any):void => {
     res.render('backend/partials/controll/panel');
 });
+
 /* */
-router.get('/backend/partials/error', function (req, res) {
+router.get('/backend/partials/error', (req:any, res:any):void => {
     res.render('backend/partials/error');
 });
+
 /*! front */
-router.get('/front/', function (req, res) {
-    res.render('front/index', { development: (config.state === "development") });
+router.get('/front/', (req:any, res:any):void => {
+    res.render('front/index', {development: (config.state === "development")});
 });
-router.get('/front/partials/browseS', function (req, res) {
+
+router.get('/front/partials/browseS', (req:any, res:any):void => {
     res.render('front/partials/browseS');
 });
-router.get('/front/partials/browse', function (req, res) {
+
+router.get('/front/partials/browse', (req:any, res:any):void => {
     res.render('front/partials/browse');
 });
-router.get('/front/partials/write', function (req, res) {
+
+router.get('/front/partials/write', (req:any, res:any):void => {
     res.render('front/partials/write');
 });
+
 /*! patient */
 router.post('/patient/accept', partient_controller.post_patient_accept);
 router.get('/patient/:id', partient_controller.get_patient_id);
@@ -402,7 +492,10 @@ router.get('/patient/count/:query', partient_controller.get_patient_count_query)
 router.get('/patient/status/:id', partient_controller.get_patient_status_id);
 router.put('/patient/status/:id', partient_controller.put_patient_status_id);
 router.put('/patient/information/:id', partient_controller.put_patient_information_id);
+
 router.get('/api/:key/patient/query/:query', partient_controller.get_api_key_patient_query_query);
+
+
 /*! account */
 router.post('/account/create', account_controller.post_account_create);
 router.post('/account/logout', account_controller.post_account_logout);
@@ -412,6 +505,7 @@ router.put('/account/:id', account_controller.put_account_id);
 router.delete('/account/:id', account_controller.delete_account_id);
 router.get('/account/query/:query', account_controller.get_account_query_query);
 router.put('/account/password/:id', account_controller.get_account_password_id);
+
 /*! views */
 router.post('/view', view_controller.post_view);
 router.post('/view/create', view_controller.post_view_create);
@@ -419,19 +513,25 @@ router.get('/view/:id', view_controller.get_view_id);
 router.put('/view/:id', view_controller.put_view_id);
 router.delete('/view/:id', view_controller.delete_view_id);
 router.get('/view/query/:query', view_controller.get_view_query_query);
+
 /*! file */
 router.get('/file/:name', file_controller.get_file_name);
 router.post('/file/:name', file_controller.post_file_name);
 router.put('/file/:name', file_controller.put_file_name);
 router.delete('/file/:name', file_controller.delete_file_name);
 router.get('/file/query/:query', file_controller.get_file_query_query);
+
 /*! pdf */
 router.get('/pdf/:id', pdf_controller.get_pdf_id);
+
 /*! config */
 router.get('/config', config_controller.get_config);
 router.put('/config', config_controller.put_config);
+
 //Test area
+
 router.get('/front/partials/browse2/:name', function (req, res) {
+
     var tohtml = new ToHtml();
     /*
      var data = {
@@ -814,18 +914,22 @@ router.get('/front/partials/browse2/:name', function (req, res) {
      }
      };
      */
-    wrapper.GetView(req.params.name, function (view) {
+
+    wrapper.GetView(req.params.name, (view:any):void => {
         var hoge = tohtml.render(view.Data.content);
         res.send(tohtml.render(view.Data.content));
-    }, function () {
+    }, () => {
         res.send(JSON.stringify(new result(10, "view get", {})));
-    }, function (message, error) {
+    }, (message:string, error:any)=> {
         res.send(JSON.stringify(new result(100, "view get", error)));
     });
 });
+
 router.get('/json', function (req, res, next) {
     var tohtml = new ToHtml();
-    var data = { name: "page1", content: {} };
+
+    var data = {name: "page1", content: {}};
+
     data.content = {
         tag: "md-content",
         style: 'page.style',
@@ -847,12 +951,12 @@ router.get('/json', function (req, res, next) {
                                                 tag: "md-button",
                                                 class: "md-raised md-primary",
                                                 style: 'height:30px;width:10px;top:130px;left:200px;z-index:1;position: absolute',
-                                                childelements: [{ value: "aaaaaaa" }]
+                                                childelements: [{value: "aaaaaaa"}]
                                             },
                                             {
                                                 tag: "md-checkbox",
                                                 "ng-model": "checkbox",
-                                                childelements: [{ value: "zz" }]
+                                                childelements: [{value: "zz"}]
                                             },
                                             {
                                                 tag: "md-input-container",
@@ -860,7 +964,7 @@ router.get('/json', function (req, res, next) {
                                                 childelements: [
                                                     {
                                                         tag: "label",
-                                                        childelements: [{ value: "AAA" }]
+                                                        childelements: [{value: "AAA"}]
                                                     },
                                                     {
                                                         tag: "input",
@@ -876,12 +980,12 @@ router.get('/json', function (req, res, next) {
                                                             {
                                                                 tag: "div",
                                                                 "ng-message": "md-maxlength",
-                                                                childelements: [{ value: "max" }]
+                                                                childelements: [{value: "max"}]
                                                             },
                                                             {
                                                                 tag: "div",
                                                                 "ng-message": "required",
-                                                                childelements: [{ value: "req" }]
+                                                                childelements: [{value: "req"}]
                                                             }
                                                         ]
                                                     }
@@ -891,7 +995,7 @@ router.get('/json', function (req, res, next) {
                                                 tag: "md-switch",
                                                 class: "md-fab md-accent",
                                                 "ng-model": "switch",
-                                                childelements: [{ value: "zz" }]
+                                                childelements: [{value: "zz"}]
                                             },
                                             {
                                                 tag: "md-radio-group",
@@ -901,12 +1005,12 @@ router.get('/json', function (req, res, next) {
                                                     {
                                                         tag: "md-radio-button",
                                                         value: "true",
-                                                        childelements: [{ value: "AAA" }]
+                                                        childelements: [{value: "AAA"}]
                                                     },
                                                     {
                                                         tag: "md-radio-button",
                                                         value: "false",
-                                                        childelements: [{ value: "a" }]
+                                                        childelements: [{value: "a"}]
                                                     }
                                                 ]
                                             }
@@ -920,7 +1024,9 @@ router.get('/json', function (req, res, next) {
             }
         ]
     };
+
     //var a = tohtml.render(data);
+
     var head = '<!DOCTYPE html>' +
         '<html lang="ja">' +
         '<head>' +
@@ -950,6 +1056,7 @@ router.get('/json', function (req, res, next) {
         '<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">' +
         '</head>' +
         '<body layout="column" ng-app="PatientsApplication" style="background-color: #A0A0FF;">';
+
     var tail = '</body>' +
         '</html>' +
         '<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>' +
@@ -968,8 +1075,10 @@ router.get('/json', function (req, res, next) {
         '<script type="text/javascript" src="/front/javascripts/PatientsApplication.min.js"></script>' +
         '<script type="text/javascript" src="/front/javascripts/PatientsControllers.min.js"></script>' +
         '<script type="text/javascript" src="/javascripts/TopControllers.min.js"></script>';
+
     res.send(head + tohtml.render(data.content) + tail);
 });
+
 logger.info('-----------------------Start---------------------');
+
 //Test area
-//# sourceMappingURL=index.js.map

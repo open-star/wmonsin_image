@@ -3,13 +3,18 @@
   "dbpassword":"wmmaster123",
   "dbaddress":"localhost",
   "dbname":"patient",
-  "user":"root",
-  "password":"yubitatefuse",
+
   "sessionkey":"Daisy, Daisy.",
   "sessionName":"wmonsin",
   "key1":"Yes We therefore I think we",
   "key2":"Man is a thinking reed",
   "key3":"KEY4",
   "state":"development",
-  "loglevel":"TRACE"
+  "loglevel":"TRACE",
+  "initusers": [
+    {"user":"root",    "password":"yubitatefuse", "type":"Admin"},
+    {"user":"Doctor1", "password":"Doctor1",      "type":"Editor"},
+    {"user":"Nurse1",  "password":"Nurse1",       "type":"Viewer"},
+    {"user":"Jimu1",   "password":"Jimu1",        "type":"Viewer"}
+  ]
 }
