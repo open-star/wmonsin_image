@@ -1071,7 +1071,403 @@ var Configure = (function () {
                     ]
                 },
                 { Name: "耳鼻いんこう科", ReadOnly: true, Pages: [] },
-                { Name: "小児科", ReadOnly: true, Pages: [] }
+                { Name: "小児科", ReadOnly: true, Pages: [
+                        {
+                            headline: "ふだんの体温",
+                            items: [
+                                { label: "ふだんの体温", name: "(℃)", model: "", type: "numeric" },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/1",
+                                    class: "md-accent"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "身長を入力して下さい",
+                            items: [
+                                { label: "身長", name: "身長(cm)", model: "", type: "numeric" },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/2",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/0",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "体重を入力して下さい",
+                            items: [
+                                { label: "体重", name: "体重(Kg)", model: "", type: "numeric" },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/3",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/1",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "ご兄弟はいらっしゃいますか？",
+                            items: [
+                                {
+                                    label: "ご兄弟",
+                                    name: "ご兄弟",
+                                    model: "",
+                                    type: "select",
+                                    items: ["ない", "ある"]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/4",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/2",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "いると答えられた方？",
+                            items: [
+                                { label: "兄弟の何番目", name: "兄弟の何番目", model: "", type: "numeric" },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/5",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/3",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "正常な出産でしたか？",
+                            items: [
+                                {
+                                    label: "出産",
+                                    name: "出産",
+                                    model: "",
+                                    type: "select",
+                                    items: ["正常", "異常"]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/6",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/4",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "これまでに受けたことのある予防接種",
+                            items: [
+                                { label: "BCG", name: "予防接種-BCG", model: "", type: "check" },
+                                { label: "三種混合", name: "予防接種-三種混合", model: "", type: "check" },
+                                { label: "麻疹", name: "予防接種-麻疹", model: "", type: "check" },
+                                { label: "ポリオ", name: "予防接種-ポリオ", model: "", type: "check" },
+                                { label: "おたふくかぜ", name: "予防接種-おたふくかぜ", model: "", type: "check" },
+                                { label: "風疹", name: "予防接種-風疹", model: "", type: "check" },
+                                { label: "水痘", name: "予防接種-水痘", model: "", type: "check" },
+                                { label: "特になし", name: "予防接種-特になし", model: "", type: "check" },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/7",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/5",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "これまでにかかった病気",
+                            items: [
+                                { label: "麻疹", name: "かかった病気-麻疹", model: "", type: "check" },
+                                { label: "おたふくかぜ", name: "かかった病気-おたふくかぜ", model: "", type: "check" },
+                                { label: "水痘", name: "かかった病気-水痘", model: "", type: "check" },
+                                { label: "風疹", name: "かかった病気-風疹", model: "", type: "check" },
+                                { label: "熱性けいれん", name: "かかった病気-熱性けいれん", model: "", type: "check" },
+                                { label: "喘息", name: "かかった病気-喘息", model: "", type: "check" },
+                                { label: "百日咳", name: "かかった病気-百日咳", model: "", type: "check" },
+                                { label: "特になし", name: "かかった病気-特になし", model: "", type: "check" },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/8",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/6",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "お薬を飲んで発疹がでたことがありますか？",
+                            items: [
+                                {
+                                    label: "お薬を飲んで発疹がでたことがありますか",
+                                    name: "お薬を飲んで発疹がでたことがありますか",
+                                    model: "",
+                                    type: "select",
+                                    items: ["ある", "ない"]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/9",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/7",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "あると答えられた方",
+                            items: [
+                                {
+                                    label: "薬品名", name: "薬品名", model: "", type: "text", items: [
+                                        { name: "required", message: "Required" },
+                                        { name: "md-maxlength", message: "Max" }]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/10",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/8",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "食べ物でアレルギーなどがありますか？",
+                            items: [
+                                {
+                                    label: "食べ物でアレルギーなどがありますか",
+                                    name: "食べ物でアレルギーなどがありますか",
+                                    model: "",
+                                    type: "select",
+                                    items: ["ある", "ない"]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/11",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/9",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "あると答えられた方",
+                            items: [
+                                {
+                                    label: "食べ物の名前", name: "食べ物の名前", model: "", type: "text", items: [
+                                        { name: "required", message: "Required" },
+                                        { name: "md-maxlength", message: "Max" }]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/12",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/10",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "本日はどのようなことで来られましたか？",
+                            items: [
+                                {
+                                    label: "本日はどのようなことで来られましたか", name: "本日はどのようなことで来られましたか", model: "", type: "text", items: [
+                                        { name: "required", message: "Required" },
+                                        { name: "md-maxlength", message: "Max" }]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/browse/13",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/11",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        },
+                        {
+                            headline: "育児、子育てなど心配事や困っていることはありますか?",
+                            items: [
+                                {
+                                    label: "心配事や困っていること", name: "心配事や困っていること", model: "", type: "text", items: [
+                                        { name: "required", message: "Required" },
+                                        { name: "md-maxlength", message: "Max" }]
+                                },
+                                {
+                                    label: "次へ",
+                                    name: "次へ",
+                                    model: "",
+                                    type: "button",
+                                    validate: true,
+                                    path: "/write",
+                                    class: "md-accent"
+                                },
+                                {
+                                    label: "戻る",
+                                    name: "戻る",
+                                    model: "",
+                                    type: "button",
+                                    validate: false,
+                                    path: "/browse/10",
+                                    class: "md-primary"
+                                }
+                            ],
+                            picture: []
+                        }
+                    ] }
             ]
         };
     }
