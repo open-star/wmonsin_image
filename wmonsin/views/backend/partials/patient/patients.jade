@@ -20,10 +20,11 @@ md-content.background
                             ng-md-icon.iconfill(icon="{{icon}}", size="46", options='{"rotation": "none"}')
                             md-tooltip Open Tools...
                     div
-                        md-autocomplete(md-no-cache="noCache", md-selected-item="selectedItem", md-search-text-change="searchTextChange(searchText)", md-search-text="searchText", md-selected-item-change="selectedItemChange(item)", md-items="item in querySearch(searchText)", md-item-text="item.Information.name",md-min-length="0", placeholder="Name", md-menu-class="autocomplete-custom-template")
+                        md-autocomplete(md-no-cache="noCache", md-selected-item="selectedItem", md-search-text-change="searchTextChange(searchText)", md-search-text="searchText", md-selected-item-change="selectedItemChange(item)", md-items="item in querySearch(searchText)", md-item-text="item.Information.name",md-min-length="0", placeholder="患者名", md-menu-class="autocomplete-custom-template")
                             md-item-template
                                 span(class="item-title")
                                     span(ng-bind="item.Information.name")
+                        md-tooltip 患者名で検索
 
             div(layout="row", layout-align="start center" hide-xs)
                 div(layout="row")
@@ -38,10 +39,11 @@ md-content.background
 
 
                 div(layout="row")
-                    md-autocomplete(md-no-cache="noCache", md-selected-item="selectedItem", md-search-text-change="searchTextChange(searchText)", md-search-text="searchText", md-selected-item-change="selectedItemChange(item)", md-items="item in querySearch(searchText)", md-item-text="item.Information.name",md-min-length="0", placeholder="Name", md-menu-class="autocomplete-custom-template")
+                    md-autocomplete(md-no-cache="noCache", md-selected-item="selectedItem", md-search-text-change="searchTextChange(searchText)", md-search-text="searchText", md-selected-item-change="selectedItemChange(item)", md-items="item in querySearch(searchText)", md-item-text="item.Information.name",md-min-length="0", placeholder="患者名", md-menu-class="autocomplete-custom-template")
                         md-item-template
                             span(class="item-title")
                                 span(ng-bind="item.Information.name")
+                    md-tooltip 患者名で検索
 
     md-list(hide-gt-xs)
         md-list-item(ng-repeat="patient in patients")

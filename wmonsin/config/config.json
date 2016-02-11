@@ -13,8 +13,8 @@
   "loglevel":"TRACE",
   "initusers": [
     {"user":"root",    "password":"yubitatefuse", "type":"Admin"},
-    {"user":"Doctor1", "password":"Doctor1",      "type":"Editor"},
-    {"user":"Nurse1",  "password":"Nurse1",       "type":"Viewer"},
-    {"user":"Jimu1",   "password":"Jimu1",        "type":"Viewer"}
+    {"user":"doctor1", "password":"doctor1",      "type":"Editor"},
+    {"user":"nurse1",  "password":"nurse1",       "type":"Viewer"},
+    {"user":"jimu1",   "password":"jimu1",        "type":"Viewer"}
   ]
 }
