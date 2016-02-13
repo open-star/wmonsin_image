@@ -37,11 +37,18 @@ md-dialog.box-edge(flex)
                         div(ng-message="pattern") カナで入力してください.
 
             div(layout="row", layout-align="space-around start")
-                div(layout="column", layout-align="center center")
+                //div(layout="column", layout-align="center center")
                     h5 誕生日
                     md-datepicker(ng-model="items.birthday", name="birthday", required)
                     div(ng-messages="validate.birthday.$error")
                         div(ng-message="required") 必ず入力してください.
+
+                div(layout="column", layout-align="center center")
+                    md-input-container(flex)
+                        label 誕生日
+                        input(ng-model="items.birthday", name="birthday", placeholder='誕生日', md-maxlength="20", required)
+                        div(ng-messages="validate.birthday.$error")
+                            div(ng-message="required") 必ず入力してください.
 
                 div(layout="column", layout-align="center center")
                     h5 性別

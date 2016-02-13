@@ -1,0 +1,46 @@
+//
+    patientdialog.jade　
+    Copyright (c) 2015 7ThCode.
+    This software is released under the MIT License.
+    http://opensource.org/licenses/mit-license.php
+
+md-dialog.box-edge(flex)
+    md-toolbar
+        .md-toolbar-tools(layout="row", layout-align="end center")
+            h3(flex)
+                span(flex) OK?
+            div
+                md-button.md-fab.md-warn(ng-click='cancel()', aria-label="Cancel", style="position:relative;top:20px;")
+                    ng-md-icon.iconfill(icon="clear", style="position:relative;top:4px;", size="46")
+                    md-tooltip キャンセル
+
+    md-dialog-content.layout-padding
+        div(layout="row" layout-align="space-around center")
+
+            div(layout="row" flex="66" layout-align="space-around center")
+
+                div(layout="column" flex="66")
+                    div(layout="row" flex="100" layout-align="center center" )
+                        .md-headline(flex="33") お名前
+                        .md-display-1(flex="66") {{name}} 様
+
+                    div(layout="row" flex="50" layout-align="center center" )
+                        .md-subhead(flex="33")  カナ
+                        .md-subhead(flex="66") {{kana}} 様
+
+
+                div(layout="column" flex="33")
+                    div(layout="row" flex="20")
+                        h5(flex="33") 誕生日
+                        h5(flex="66") {{birthday}}
+
+                    div(layout="row")
+                        h5(flex="33") 性別
+                        h5(flex="66") {{gender}}
+
+                    div(layout="row")
+                        h5(flex="33") 受付時間
+                        h5(flex="66") {{time}}
+
+    md-dialog-actions(layout="row")
+        md-button.md-raised.md-primary(ng-click='answer()', aria-label="Save") 開始

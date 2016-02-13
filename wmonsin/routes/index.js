@@ -257,6 +257,9 @@ router.get('/backend/partials/patient/description/:id', function (req, res, next
         }
     });
 });
+router.get('/front/dialog/confirmdialog', function (req, res) {
+    res.render('front/dialog/confirmdialog');
+});
 router.get('/backend/partials/patient/patientacceptdialog', function (req, res) {
     res.render('backend/partials/patient/patientacceptdialog');
 });

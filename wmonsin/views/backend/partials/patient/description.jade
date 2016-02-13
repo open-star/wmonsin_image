@@ -105,9 +105,11 @@ md-content.background
                                         div(ng-messages="validate.patientid.$error")
                                             div(ng-message="md-maxlength") too long
 
-                                    div
-                                        h5 誕生日
-                                        md-datepicker(ng-model="birthday")
+                                    md-input-container(flex)
+                                        label 誕生日
+                                        input(ng-model="Information.birthday", name="birthday", placeholder='誕生日', md-maxlength="30")
+                                        div(ng-messages="validate.birthday.$error")
+                                            div(ng-message="md-maxlength") too long
 
                                     div
                                         h5 性別

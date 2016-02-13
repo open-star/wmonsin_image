@@ -1333,7 +1333,7 @@ var Configure = (function () {
                                     name: "次へ",
                                     model: "",
                                     type: "button",
-                                    validate: true,
+                                    validate: false,
                                     path: "/browse/10",
                                     class: "md-accent"
                                 },
@@ -1393,7 +1393,7 @@ var Configure = (function () {
                                     name: "次へ",
                                     model: "",
                                     type: "button",
-                                    validate: true,
+                                    validate: false,
                                     path: "/browse/12",
                                     class: "md-accent"
                                 },
@@ -1422,7 +1422,7 @@ var Configure = (function () {
                                     name: "次へ",
                                     model: "",
                                     type: "button",
-                                    validate: true,
+                                    validate: false,
                                     path: "/browse/13",
                                     class: "md-accent"
                                 },
@@ -1447,11 +1447,11 @@ var Configure = (function () {
                                         { name: "md-maxlength", message: "Max" }]
                                 },
                                 {
-                                    label: "次へ",
-                                    name: "次へ",
+                                    label: "完了です",
+                                    name: "完了です",
                                     model: "",
                                     type: "button",
-                                    validate: true,
+                                    validate: false,
                                     path: "/write",
                                     class: "md-accent"
                                 },

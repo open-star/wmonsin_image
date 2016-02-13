@@ -95,8 +95,8 @@ function PatientsList(resource, success) {
         }
     });
 }
-controllers.controller('BrowseSController', ["$scope", "$stateParams", "$location", 'Patient', 'PatientQuery', "CurrentPatient", "Global", 'ViewQuery', 'Views',
-    function ($scope, $stateParams, $location, Patient, PatientQuery, CurrentPatient, Global, ViewQuery, Views) {
+controllers.controller('BrowseSController', ["$scope", "$stateParams", "$location", '$mdDialog', 'Patient', 'PatientQuery', "CurrentPatient", "Global", 'ViewQuery', 'Views',
+    function ($scope, $stateParams, $location, $mdDialog, Patient, PatientQuery, CurrentPatient, Global, ViewQuery, Views) {
         List(ViewQuery, {}, function (data) {
             PatientsList(PatientQuery, function (patients) {
                 $scope.patients = patients;
@@ -115,7 +115,14 @@ controllers.controller('BrowseSController', ["$scope", "$stateParams", "$locatio
                         $scope.Information = CurrentPatient.Information;
                         $scope.Input = CurrentPatient.Input;
                         $scope.Sequential = CurrentPatient.Sequential;
-                        $location.path('/browse/0');
+                        $mdDialog.show({
+                            controller: 'ConfirmDialogController',
+                            templateUrl: '/front/dialog/confirmdialog',
+                            targetEvent: ""
+                        }).then(function (answer) {
+                            $location.path('/browse/0');
+                        }, function () {
+                        });
                     }
                 }
             });
@@ -239,5 +246,23 @@ controllers.controller('WriteController', ["$scope", "$stateParams", "$location"
             Global.socket.emit('server', { value: "1" });
             $scope.send = false;
         });
+    }]);
+controllers.controller('ConfirmDialogController', ['$scope', '$mdDialog', 'CurrentPatient',
+    function ($scope, $mdDialog, CurrentPatient) {
+        $scope.kana = CurrentPatient.Information.kana;
+        $scope.name = CurrentPatient.Information.name;
+        $scope.time = CurrentPatient.Information.time;
+        $scope.gender = CurrentPatient.Information.gender;
+        $scope.birthday = CurrentPatient.Information.birthday;
+        $scope.patientid = CurrentPatient.Information.patientid;
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function (answer) {
+            $mdDialog.hide($scope);
+        };
     }]);
 //# sourceMappingURL=PatientsControllers.js.map

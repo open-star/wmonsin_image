@@ -328,7 +328,7 @@ controllers.controller('PatientsController', ['$scope', '$state', '$stateParams'
                                 var min = ("0" + now.getMinutes()).slice(-2); // 分
                                 var sec = ("0" + now.getSeconds()).slice(-2); // 秒
                                 patient.Information.time = hour + ':' + min + ':' + sec;
-                                patient.Information.birthday = answer.items.birthday.toDateString();
+                                patient.Information.birthday = answer.items.birthday; //.toLocaleString('ja', {year:'2-digit', month:'narrow', day:'numeric'});//toDateString();
                                 patient.Information.gender = answer.items.gender;
                                 answer.items.kana = answer.items.kana.replace(/[ぁ-ん]/g, function (s) {
                                     return String.fromCharCode(s.charCodeAt(0) + 0x60);
@@ -456,9 +456,10 @@ controllers.controller('DescriptionController', ['$scope', '$mdBottomSheet', '$m
                                 }
                                 $scope.Input.push(value);
                             });
-                            var d = new Date();
-                            d.setTime(Date.parse(data.value.Information.birthday));
-                            $scope.birthday = d;
+                            //   var d = new Date();
+                            //   d.setTime(Date.parse(data.value.Information.birthday));
+                            //   $scope.birthday = d;
+                            $scope.birthday = data.value.Information.birthday;
                             $scope.Information = data.value.Information;
                         }
                         else {
@@ -504,7 +505,7 @@ controllers.controller('DescriptionController', ['$scope', '$mdBottomSheet', '$m
                 patientinformation.kana = $scope.Information.kana;
                 patientinformation.insurance = $scope.Information.insurance;
                 patientinformation.patientid = $scope.Information.patientid;
-                patientinformation.birthday = $scope.birthday.toDateString(); //  $scope.Information.birthday;
+                patientinformation.birthday = $scope.Information.birthday; //$scope.birthday.toDateString(); //  $scope.Information.birthday;
                 patientinformation.gender = $scope.Information.gender;
                 patientinformation.$update({ id: CurrentPatient.id }, function (result) {
                     $mdToast.show($mdToast.simple().content("OK."));
