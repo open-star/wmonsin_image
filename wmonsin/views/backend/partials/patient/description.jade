@@ -97,25 +97,33 @@ md-content.background
                     md-card
                         md-card-content(layout-align="start start", flex)
                             ng-form(name="validate")
+                                div(layout="row", layout-align="center center" flex)
+                                    div(layout="column",flex="50", layout-align="start start")
+                                        md-input-container(flex)
+                                            label レセコンの患者ID
+                                            input(ng-model="Information.patientid", name="patientid", placeholder='レセコンの患者ID', md-maxlength="30")
+                                            div(ng-messages="validate.patientid.$error")
+                                                div(ng-message="md-maxlength") too long
 
-                                div(layout="column", layout-align="start start")
-                                    md-input-container(flex)
-                                        label レセコンの患者ID
-                                        input(ng-model="Information.patientid", name="patientid", placeholder='レセコンの患者ID', md-maxlength="30")
-                                        div(ng-messages="validate.patientid.$error")
-                                            div(ng-message="md-maxlength") too long
+                                        md-input-container(flex)
+                                            label 誕生日
+                                            input(ng-model="Information.birthday", name="birthday", placeholder='誕生日', md-maxlength="30")
+                                            div(ng-messages="validate.birthday.$error")
+                                                div(ng-message="md-maxlength") too long
 
-                                    md-input-container(flex)
-                                        label 誕生日
-                                        input(ng-model="Information.birthday", name="birthday", placeholder='誕生日', md-maxlength="30")
-                                        div(ng-messages="validate.birthday.$error")
-                                            div(ng-message="md-maxlength") too long
+                                        div
+                                            h5 性別
+                                            md-radio-group(ng-model="Information.gender")
+                                                md-radio-button(value="男性") 男性
+                                                md-radio-button(value="女性") 女性
 
-                                    div
-                                        h5 性別
-                                        md-radio-group(ng-model="Information.gender")
-                                            md-radio-button(value="男性") 男性
-                                            md-radio-button(value="女性") 女性
+
+                                    div(layout="column",flex="50", layout-align="start start")
+                                        md-input-container(flex)
+                                            label メモ
+                                            input(ng-model="Information.memo", name="memo", placeholder='メモ', md-maxlength="300")
+                                            div(ng-messages="validate.patientid.$error")
+                                                div(ng-message="md-maxlength") too long
 
                                 md-button.md-raised.md-primary(ng-click='setPatientID()', ng-disabled="validate.patientid.$invalid", aria-label="Save") Save
 

@@ -30,7 +30,7 @@ md-dialog.box-edge(flex)
                 ng-md-icon.iconfill-blue(icon="account_circle", size="46")
                 md-input-container(flex)
                     label カナ
-                    input(ng-model="items.kana", ng-pattern="/^[ぁ-んァ-ン]+$/", data-ng-required="true", name="kana", placeholder='Enter Kana', md-maxlength="30", required)
+                    input(ng-model="items.kana", ng-pattern="/^[ぁ-んァ-ン s]+$/", data-ng-required="true", name="kana", placeholder='Enter Kana', md-maxlength="30", required)
                     div(ng-messages="validate.kana.$error")
                         div(ng-message="required") 必ず入力してください.
                         div(ng-message="md-maxlength") もうすこし短くしてください.
