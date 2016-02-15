@@ -16,6 +16,9 @@ md-dialog.box-edge(flex)
                     ng-md-icon.iconfill(icon="clear", style="position:relative;top:4px;", size="46")
                     md-tooltip #{content.cancel}
 
+    md-dialog-content.layout-padding
+        h3 削除します。よろしいですか？
+
     md-dialog-actions(layout="row")
         div.row
             md-button.md-raised.md-primary(ng-click='answer(null)', aria-label="Delete") #{content.delete}
