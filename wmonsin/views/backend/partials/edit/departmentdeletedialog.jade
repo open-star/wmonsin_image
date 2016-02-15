@@ -6,7 +6,7 @@
 
 - var content = {headline:"診療科削除", cancel:"キャンセル", depertment:"診療科名", delete:"削除" }
 
-md-dialog.box-edge(flex="percentage")
+md-dialog.box-edge(flex)
     md-toolbar
         .md-toolbar-tools(layout="row", layout-align="end center")
             h3(flex)
@@ -16,7 +16,7 @@ md-dialog.box-edge(flex="percentage")
                     ng-md-icon.iconfill(icon="clear", style="position:relative;top:4px;", size="46")
                     md-tooltip #{content.cancel}
 
-    md-dialog-content.layout-padding
     md-dialog-actions(layout="row")
-            md-button.md-raised.md-primary(ng-click='answer()', aria-label="Delete") #{content.delete}
+        div.row
+            md-button.md-raised.md-primary(ng-click='answer(null)', aria-label="Delete") #{content.delete}
             md-tooltip #{content.delete}
