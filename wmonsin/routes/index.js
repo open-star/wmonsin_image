@@ -173,6 +173,7 @@ try {
                 ev.on("view", function (data) {
                     var view = new ViewModel();
                     view.Name = data.Name;
+                    view.Group = data.Group;
                     view.Pages = data.Pages;
                     view.save(function (error) {
                         logger.trace("Created init View");

@@ -16,7 +16,8 @@ var toLocalTime = function (time) {
 var Patient = new Schema({
     'Date': { type: Date, default: toLocalTime(Date.now) },
     'Status': { type: String, default: "Init" },
-    'Category': { type: String, default: "1" },
+    'Category': { type: String, default: "" },
+    'Group': { type: String, default: "" },
     'Information': {},
     'Input': {},
     'Sequential': 0

@@ -4,11 +4,13 @@
     This software is released under the MIT License.
     http://opensource.org/licenses/mit-license.php
 
+- var content = {headline:"患者"}
+
 md-content.background
     md-progress-circular.md-accent(ng-show="progress", md-mode="indeterminate", style="position:absolute;top:50%;left:50%;")
     md-card.box-edge
         md-card-content.layout-padding
-            h1.md-headline 患者
+            h1.md-headline #{content.headline}
             div(layout="row", layout-align="start center", hide-gt-xs)
                 div(layout="column")
                     div
@@ -37,7 +39,6 @@ md-content.background
                         ng-md-icon.iconfill(icon="{{icon}}", size="46", options='{"rotation": "none"}')
                         md-tooltip Open Tools...
 
-
                 div(layout="row")
                     md-autocomplete(md-no-cache="noCache", md-selected-item="selectedItem", md-search-text-change="searchTextChange(searchText)", md-search-text="searchText", md-selected-item-change="selectedItemChange(item)", md-items="item in querySearch(searchText)", md-item-text="item.Information.name",md-min-length="0", placeholder="患者名", md-menu-class="autocomplete-custom-template")
                         md-item-template
@@ -54,14 +55,15 @@ md-content.background
                             ng-md-icon(icon="assignment_ind", style="position:relative;top:6px;fill:#abcdef", size="22")
                             md-tooltip Description...
                     div.md-body-2(layout="column", flex="20", ng-bind="patient.Category")
+                    div.md-body-3(layout="column",style="font-size:10px;", flex="10", ng-bind="patient.Group")
                     div(layout="column", flex="20")
                         span(style="font-size:9px;", ng-bind="patient.Information.kana")
                         span.md-body-2(ng-bind="patient.Information.name")
                     div(layout="column", flex="20")
                         //span.md-body-2(style="font-size:9px;", ng-bind="patient.Information.insurance")
                         span.md-body-2(style="font-size:9px;", ng-bind="patient.Information.patientid")
-                        span.md-body-2(ng-bind="patient.Date | date:'yy-MM-dd HH:mm'")
-                    div.md-body-2(layout="row", flex="20", layout-align="end center", ng-bind="patient.Status | status")
+                        span.md-body-2(style="font-size:10px;", ng-bind="patient.Date | date:'yy-MM-dd HH:mm'")
+                    div.md-body-2(layout="row", flex="10", layout-align="end center", ng-bind="patient.Status | status")
 
     md-list(hide-xs)
         md-list-item(ng-repeat="patient in patients")
@@ -72,11 +74,12 @@ md-content.background
                             ng-md-icon(icon="assignment_ind", style="position:relative;top:6px;fill:#abcdef", size="42")
                             md-tooltip Description...
                     div(layout="column", flex="20", ng-bind="patient.Category")
+                    div.md-body-3(layout="column",style="font-size:10px;", flex="10", ng-bind="patient.Group")
                     div(layout="column", flex="20")
                         span(style="font-size:9px;", ng-bind="patient.Information.kana")
                         span.md-subhead(ng-bind="patient.Information.name")
                     div(layout="column", flex="20")
                         //span.md-subhead(style="font-size:9px;", ng-bind="patient.Information.insurance")
                         span.md-subhead(style="font-size:9px;", ng-bind="patient.Information.patientid")
-                        span.md-subhead(ng-bind="patient.Date | date:'yyyy-MM-dd HH:mm:ss'")
-                    div(layout="row", flex="20", layout-align="end center", ng-bind="patient.Status | status")
+                        span.md-subhead(style="font-size:10px;", ng-bind="patient.Date | date:'yyyy-MM-dd HH:mm:ss'")
+                    div(layout="row", flex="10", layout-align="end center", ng-bind="patient.Status | status")

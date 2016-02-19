@@ -4,7 +4,7 @@
     This software is released under the MIT License.
     http://opensource.org/licenses/mit-license.php
 
-- var content = {headline:"診療科コピー", cancel:"キャンセル", depertment:"診療科名", copy:"コピー", required:"必ず入力してください", toolong:"もうすこし短くしてください" }
+- var content = {headline:"診療科コピー", cancel:"キャンセル", group:"Group", depertment:"診療科名", copy:"コピー", required:"必ず入力してください", toolong:"もうすこし短くしてください" }
 
 md-dialog.box-edge(flex)
     md-toolbar
@@ -22,10 +22,19 @@ md-dialog.box-edge(flex)
                 ng-md-icon.iconfill(icon="account_circle", size="46")
                 md-input-container(flex)
                     label #{content.depertment}
-                    input(ng-model="items.department", data-ng-required="true", name="department", placeholder='Enter Department name', md-maxlength="30", required)
+                    input(ng-model="department", data-ng-required="true", name="department", placeholder='Enter Department name', md-maxlength="30", required)
                     div(ng-messages="validate.department.$error")
-                        div(ng-message="required") #{content.required}
-                        div(ng-message="md-maxlength") #{content.toolong}
+                        h6(ng-message="required") #{content.required}
+                        h6(ng-message="md-maxlength") #{content.toolong}
+
+            div(layout="row", layout-align="start center")
+                ng-md-icon.iconfill(icon="account_circle", size="46")
+                md-input-container(flex)
+                    label #{content.group}
+                    input(ng-model="group", data-ng-required="true", name="group", placeholder='Enter Group', md-maxlength="30", required)
+                    div(ng-messages="validate.group.$error")
+                        h6(ng-message="required") #{content.required}
+                        h6(ng-message="md-maxlength") #{content.toolong}
 
     md-dialog-actions(layout="row")
                 md-button.md-raised.md-primary(ng-click='answer()', ng-disabled="validate.$invalid", aria-label="") #{content.copy}

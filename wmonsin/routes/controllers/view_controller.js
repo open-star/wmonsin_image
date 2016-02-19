@@ -51,6 +51,7 @@ var ViewController = (function () {
                             if (count === 0) {
                                 var view = new ViewModel();
                                 view.Name = req.body.Name;
+                                view.Group = req.body.Group;
                                 view.Pages = req.body.Pages;
                                 wrapper.Save(res, number, view, function (res, view) {
                                     wrapper.SendResult(res, 0, "OK", view);
@@ -86,6 +87,7 @@ var ViewController = (function () {
                 wrapper.If(res, number, (user.type != "Viewer"), function (res) {
                     wrapper.FindById(res, number, ViewModel, req.params.id, function (res, view) {
                         view.Name = req.body.Name;
+                        view.Group = req.body.Group;
                         view.Pages = req.body.Pages;
                         wrapper.Save(res, number, view, function (res, object) {
                             wrapper.SendResult(res, 0, "OK", view);
@@ -116,7 +118,7 @@ var ViewController = (function () {
             var number = 23000;
             wrapper.Authenticate(req, res, number, function (user, res) {
                 var query = JSON.parse(decodeURIComponent(req.params.query));
-                wrapper.Find(res, number, ViewModel, {}, {}, {}, function (res, views) {
+                wrapper.Find(res, number, ViewModel, query, {}, {}, function (res, views) {
                     wrapper.SendResult(res, 0, "OK", views);
                     logger.trace("end /view/:id");
                 });

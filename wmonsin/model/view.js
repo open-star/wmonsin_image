@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var View = new Schema({
     Name: { type: String, required: true },
+    Group: { type: String, required: true },
     Pages: {}
 });
 module.exports = mongoose.model('View', View);

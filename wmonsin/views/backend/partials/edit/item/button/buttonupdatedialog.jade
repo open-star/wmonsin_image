@@ -24,15 +24,15 @@ md-dialog.box-edge(flex)
                         label #{content.name}
                         input(ng-model="items.name", data-ng-required="true", name="name", placeholder='Enter Name', md-maxlength="20", required)
                         div(ng-messages="validate.name.$error")
-                            div(ng-message="required") #{content.required}
-                            div(ng-message="md-maxlength") #{content.toolong}
+                            h6(ng-message="required") #{content.required}
+                            h6(ng-message="md-maxlength") #{content.toolong}
 
                     md-input-container(flex)
                         label アイテムラベル
                         input(ng-model="items.label", data-ng-required="true", name="label", placeholder='Enter Label', md-maxlength="20", required)
                         div(ng-messages="validate.label.$error")
-                            div(ng-message="required") #{content.required}
-                            div(ng-message="md-maxlength") #{content.toolong}
+                            h6(ng-message="required") #{content.required}
+                            h6(ng-message="md-maxlength") #{content.toolong}
 
                 div(layout="row")
                     md-switch(ng-model="isPage", aria-label="IsPage") 問診終了/ページ遷移
@@ -41,7 +41,7 @@ md-dialog.box-edge(flex)
                         label ページ
                         input(ng-model="items.page", name="page", placeholder='Enter Path')
                         div(ng-messages="validate.page.$error")
-                            div(ng-message="md-maxlength") #{content.toolong}
+                            h6(ng-message="md-maxlength") #{content.toolong}
 
                 div(layout="row")
                     md-switch(ng-model="items.validate", aria-label="validate", equired) バリデート

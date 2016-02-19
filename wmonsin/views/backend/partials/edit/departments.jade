@@ -20,7 +20,8 @@ md-content.background
         md-list-item(ng-repeat="Department in Departments", ng-show="account.type != 'Admin'")
             md-card(layout="row", flex)
                 md-card-content(layout="row", layout-align="end center", flex)
-                    h1.md-subhead(flex, ng-bind="Department.Name")
+                    h1.md-title(flex, ng-bind="Department.Name")
+                    h2.md-subhead(flex, style="color:#404040;" ng-bind="Department.Group")
                     div(layout="row", ng-if="type != 'Viewer'")
                         md-button.md-fab.md-mini(ng-click="showDepartmentCopyDialog(Department._id)", aria-label="Copy", style="background-color:#00897B;z-index:1;")
                             ng-md-icon.iconfill(icon="content_copy", style="position:relative;top:6px;left:1px;", size="22")
@@ -39,17 +40,15 @@ md-content.background
             md-card(layout="row", flex)
                 md-card-content(layout="row", layout-align="end center", flex)
                     h3.md-title(flex, ng-bind="Department.Name")
-
+                    h4.md-subhead(flex, style="color:#404040;", ng-bind="Department.Group")
                     div(layout="row", ng-if="type != 'Viewer'")
                         md-button.md-fab(ng-click="showDepartmentCopyDialog(Department._id)", aria-label="Copy", style="background-color:#00897B;z-index:1;")
                             ng-md-icon.iconfill(icon="content_copy", style="position:relative;top:6px;left:1px;", size="42")
                             md-tooltip #{content.copy}
-
                     div(layout="row", ng-if="type != 'Viewer'")
                         md-button.md-fab(ng-click="DepartmentUpdate(Department._id)", aria-label="Update", style="background-color:#4527A0;z-index:1;")
                             ng-md-icon.iconfill(icon="mode_edit", style="position:relative;top:6px;left:1px;", size="42")
                             md-tooltip #{content.update}
-
                     div(layout="row")
                         md-button.md-fab(ng-click="showDepartmentDeleteDialog(Department._id)", aria-label="Delete", style="background-color:#ff5050;z-index:1;", ng-if="type != 'Viewer'")
                             ng-md-icon.iconfill(icon="remove", style="position:relative;top:6px;left:1px;", size="42")

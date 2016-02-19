@@ -34,6 +34,7 @@ var PatientController = (function () {
                     patient.Information = req.body.Information;
                     patient.Date = new Date();
                     patient.Category = req.body.Category;
+                    patient.Group = req.body.Group;
                     patient.Status = req.body.Status;
                     patient.Input = req.body.Input;
                     patient.Sequential = req.body.Sequential;

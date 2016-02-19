@@ -24,8 +24,8 @@ md-dialog.box-edge(flex)
                     label #{content.name}
                     input(ng-model="items.username", data-ng-required="true", name="username", placeholder='Enter Username', md-maxlength="30", required)
                     div(ng-messages="validate.username.$error")
-                        div(ng-message="required") #{content.required}
-                        div(ng-message="md-maxlength") #{content.toolong}
+                        h6(ng-message="required") #{content.required}
+                        h6(ng-message="md-maxlength") #{content.toolong}
 
             div(layout="row", layout-align="start center")
                 ng-md-icon.iconfill-pink(icon="vpn_key", size="46")
@@ -33,8 +33,8 @@ md-dialog.box-edge(flex)
                     label #{content.password}
                     input(ng-model="items.password", data-ng-required="true", name="password", placeholder='Password', type="password", md-maxlength="30", required)
                     div(ng-messages="validate.password.$error")
-                        div(ng-message="required") #{content.required}
-                        div(ng-message="md-maxlength") #{content.toolong}
+                        h6(ng-message="required") #{content.required}
+                        h6(ng-message="md-maxlength") #{content.toolong}
 
             md-radio-group(ng-model="items.type", aria-label="", required)
                 md-radio-button(value="Editor", aria-label="") #{content.editor}

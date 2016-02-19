@@ -24,8 +24,8 @@ md-dialog.box-edge(flex)
                     label #{content.field1}
                     input(ng-model="items.title", data-ng-required="true", name="title", placeholder='Enter title', md-maxlength="30", required)
                     div(ng-messages="validate.title.$error")
-                        div(ng-message="required") #{content.required}
-                        div(ng-message="md-maxlength") #{content.toolong}
+                        h6(ng-message="required") #{content.required}
+                        h6(ng-message="md-maxlength") #{content.toolong}
 
     md-dialog-actions(layout="row")
                 md-button.md-raised.md-primary(ng-click='answer()', ng-disabled="validate.$invalid", aria-label="") #{content.save}

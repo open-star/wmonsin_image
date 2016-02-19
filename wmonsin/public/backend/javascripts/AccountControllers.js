@@ -333,6 +333,7 @@ controllers.controller('PatientsController', ['$scope', '$state', '$stateParams'
                                 answer.items.kana = answer.items.kana.replace(/[ぁ-ん]/g, function (s) {
                                     return String.fromCharCode(s.charCodeAt(0) + 0x60);
                                 });
+                                patient.Group = answer.items.group;
                                 patient.Information.kana = answer.items.kana;
                                 patient.Information.insurance = answer.items.insurance;
                                 patient.Category = answer.items.category;
@@ -753,6 +754,7 @@ controllers.controller('DepartmentsController', ['$scope', '$state', "$mdDialog"
             }).then(function (answer) {
                 var view = new ViewCreate();
                 view.Name = answer.items.department;
+                view.Group = answer.items.group;
                 view.$save({}, function (result) {
                     if (result) {
                         if (result.code === 0) {
@@ -786,7 +788,8 @@ controllers.controller('DepartmentsController', ['$scope', '$state', "$mdDialog"
                 }).then(function (answer) {
                     var view = new ViewCreate();
                     view.Pages = data.value.Pages;
-                    view.Name = answer.items.department;
+                    view.Name = answer.department;
+                    view.Group = answer.group;
                     view.$save({}, function (result) {
                         if (result) {
                             if (result.code === 0) {
@@ -870,6 +873,7 @@ controllers.controller('DepartmentEditController', ['$scope', '$state', '$mdDial
             $scope.DepartmentUpdate = function () {
                 var view = new View();
                 view.Name = CurrentView.Data.Name;
+                view.Group = CurrentView.Data.Group;
                 view.Pages = CurrentView.Data.Pages;
                 view.$update({ id: CurrentView.Data._id }, function (result) {
                     if (result) {
@@ -949,6 +953,7 @@ controllers.controller('PageEditController', ['$scope', '$state', '$mdDialog', '
             $scope.DepartmentUpdate = function () {
                 var view = new View();
                 view.Name = CurrentView.Data.Name;
+                view.Group = CurrentView.Data.Group;
                 view.Pages = CurrentView.Data.Pages;
                 view.$update({ id: CurrentView.Data._id }, function (result) {
                     if (result) {
@@ -1446,11 +1451,20 @@ controllers.controller('NotificationDialogController', ['$scope', '$mdDialog',
 controllers.controller('PatientAcceptDialogController', ['$scope', '$mdDialog', 'ViewQuery', 'items',
     function ($scope, $mdDialog, ViewQuery, items) {
         $scope.items = items;
-        $scope.categories = [];
+        $scope.groups = [];
         $scope.progress = true;
         List(ViewQuery, {}, function (data) {
-            _.each(data, function (item, index) {
-                $scope.categories.push(item.Name);
+            _.map(data, function (item, index) {
+                $scope.groups.push(item.Group);
+            });
+            $scope.$watch('items.group', function () {
+                $scope.categories = [];
+                var selected = $scope.items.group;
+                List(ViewQuery, { Group: selected }, function (data) {
+                    _.each(data, function (item, index) {
+                        $scope.categories.push(item.Name);
+                    });
+                });
             });
             $scope.progress = false;
         });
@@ -1478,6 +1492,8 @@ controllers.controller('DepartmentCreateDialogController', ['$scope', '$mdDialog
     }]);
 controllers.controller('DepartmentCopyDialogController', ['$scope', '$mdDialog', 'ViewQuery', 'items',
     function ($scope, $mdDialog, ViewQuery, items) {
+        $scope.department = items.value.Name;
+        $scope.group = items.value.Group;
         $scope.hide = function () {
             $mdDialog.hide();
         };

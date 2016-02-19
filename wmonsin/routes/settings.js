@@ -10,7 +10,7 @@ var Configure = (function () {
         this.initView = {
             Views: [
                 {
-                    Name: "内科", ReadOnly: true, Pages: [
+                    Name: "内科", Group: "内科", ReadOnly: true, Pages: [
                         {
                             headline: "どのような症状ですか？",
                             items: [
@@ -377,7 +377,7 @@ var Configure = (function () {
                     ]
                 },
                 {
-                    Name: "外科", ReadOnly: true, Pages: [
+                    Name: "外科", Group: "外科", ReadOnly: true, Pages: [
                         {
                             headline: "お名前？",
                             items: [
@@ -647,7 +647,7 @@ var Configure = (function () {
                     ]
                 },
                 {
-                    Name: "整形外科", ReadOnly: true, Pages: [
+                    Name: "整形外科", Group: "整形外科", ReadOnly: true, Pages: [
                         {
                             headline: "身長を入力して下さい",
                             items: [
@@ -1070,8 +1070,8 @@ var Configure = (function () {
                         }
                     ]
                 },
-                { Name: "耳鼻いんこう科", ReadOnly: true, Pages: [] },
-                { Name: "小児科", ReadOnly: true, Pages: [
+                { Name: "耳鼻いんこう科", Group: "耳鼻いんこう科", ReadOnly: true, Pages: [] },
+                { Name: "小児科", Group: "小児科", ReadOnly: true, Pages: [
                         {
                             headline: "ふだんの体温",
                             items: [
