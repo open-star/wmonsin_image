@@ -49,7 +49,7 @@ md-dialog.box-edge(flex)
                     h5 誕生日
                     md-input-container(flex)
                         label 誕生日
-                        input(ng-model="items.birthday", name="birthday", placeholder='誕生日', md-maxlength="20", required)
+                        input(ng-model="items.birthday", type="date", data-ng-required="true", name="birthday", placeholder='誕生日', required)
                         div(ng-messages="validate.birthday.$error")
                             h6(ng-message="required") 必ず入力してください.
 
