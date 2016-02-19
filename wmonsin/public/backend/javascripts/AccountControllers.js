@@ -659,7 +659,7 @@ controllers.controller('AccountsController', ['$scope', '$state', "$mdDialog", '
                             $mdDialog.show({
                                 controller: 'AccountUpdateDialogController',
                                 templateUrl: '/backend/partials/account/accountdialog',
-                                targetEvent: id,
+                                targetEvent: null,
                                 locals: {
                                     items: $scope.items
                                 }
