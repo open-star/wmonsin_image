@@ -46,7 +46,7 @@ var ViewController = (function () {
             var number = 19000;
             wrapper.Authenticate(req, res, number, function (user, res) {
                 wrapper.If(res, number, (user.type != "Viewer"), function (res) {
-                    ViewModel.count({ Name: req.body.Name }, function (error, count) {
+                    ViewModel.count({ $and: [{ Name: req.body.Name }, { Group: req.body.Group }] }, function (error, count) {
                         if (!error) {
                             if (count === 0) {
                                 var view = new ViewModel();

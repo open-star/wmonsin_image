@@ -9,7 +9,7 @@
   "key1":"Yes We therefore I think we",
   "key2":"Man is a thinking reed",
   "key3":"KEY4",
-  "state":"production",
+  "state":"development",
   "loglevel":"TRACE",
   "initusers": [
     {"user":"root",    "password":"yubitatefuse", "type":"Admin"},
