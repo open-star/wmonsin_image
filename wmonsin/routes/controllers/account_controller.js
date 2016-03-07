@@ -48,7 +48,7 @@ var AccountController = (function () {
                             });
                         }
                         else {
-                            wrapper.SendResult(res, 1, messages.already, {});
+                            wrapper.SendResult(res, 1, "同一のユーザ名がすでに登録されています。", {});
                         }
                     });
                 });
@@ -147,13 +147,11 @@ var AccountController = (function () {
         logger.trace("begin /account/query/:query");
         wrapper.Guard(req, res, function (req, res) {
             var number = 14000;
-            // Authenticate(req, res, number, (user:any, res:any) => {
             var query = JSON.parse(decodeURIComponent(req.params.query));
             wrapper.Find(res, number, AccountModel, query, {}, {}, function (res, docs) {
                 wrapper.SendResult(res, 0, "OK", wrapper.StripAccounts(docs));
                 logger.trace("end /account/query/:query");
             });
-            //});
         });
     };
     /*! update */

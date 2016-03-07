@@ -59,7 +59,7 @@ var ViewController = (function () {
                                 });
                             }
                             else {
-                                wrapper.SendResult(res, number + 1, "already", {});
+                                wrapper.SendResult(res, number + 1, "同一診療科に同じ名前の問診票が存在しています。", {});
                             }
                         }
                         else {

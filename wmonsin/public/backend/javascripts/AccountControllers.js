@@ -322,7 +322,7 @@ controllers.controller('PatientsController', ['$scope', '$state', '$stateParams'
                                 var patient = new PatientAccept();
                                 patient.Input = {};
                                 patient.Information = { name: "", time: "", kana: "", insurance: "", patientid: "", birthday: "", gender: "" };
-                                patient.Information.name = answer.items.name;
+                                patient.Information.name = answer.items.firstname + ' ' + answer.items.lastname;
                                 var now = new Date();
                                 var hour = ("0" + now.getHours()).slice(-2); // 時
                                 var min = ("0" + now.getMinutes()).slice(-2); // 分
@@ -330,11 +330,12 @@ controllers.controller('PatientsController', ['$scope', '$state', '$stateParams'
                                 patient.Information.time = hour + ':' + min + ':' + sec;
                                 patient.Information.birthday = answer.items.birthday; //.toLocaleString('ja', {year:'2-digit', month:'narrow', day:'numeric'});//toDateString();
                                 patient.Information.gender = answer.items.gender;
-                                answer.items.kana = answer.items.kana.replace(/[ぁ-ん]/g, function (s) {
+                                var kana = answer.items.firstkana + " " + answer.items.lastkana;
+                                var converted_kana = kana.replace(/[ぁ-ん]/g, function (s) {
                                     return String.fromCharCode(s.charCodeAt(0) + 0x60);
                                 });
                                 patient.Group = answer.items.group;
-                                patient.Information.kana = answer.items.kana;
+                                patient.Information.kana = converted_kana;
                                 patient.Information.insurance = answer.items.insurance;
                                 patient.Category = answer.items.category;
                                 patient.Sequential = items.count;

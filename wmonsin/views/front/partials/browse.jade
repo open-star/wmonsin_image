@@ -50,7 +50,7 @@ md-content.background
                                 div(layout="row",flex)
                                     md-input-container(style="width:100%")
                                         label(ng-bind="content.label")
-                                        input(ng-model="content.model", placeholder="",name="{{content.name}}",ng-pattern="/^[0-9]+$/", md-maxlength="30", required)
+                                        input(ng-model="content.model", placeholder="",name="{{content.name}}",ng-pattern="/^[0-9]+\.[0-9]+$/", md-maxlength="30", required)
 
                                 div(layout="row",layout-align="center center", flex)
                                     div(layout="column",layout-align="center center", flex="80")

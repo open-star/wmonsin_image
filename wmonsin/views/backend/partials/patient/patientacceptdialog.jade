@@ -22,18 +22,33 @@ md-dialog.box-edge(flex)
             div(layout="row", layout-align="start center")
                 ng-md-icon.iconfill-blue(icon="account_circle", size="46")
                 md-input-container(flex)
-                    label 名前
-                    input(ng-model="items.name", data-ng-required="true", name="username", placeholder='Enter Name', md-maxlength="30", required)
-                    div(ng-messages="validate.username.$error")
+                    label First Name
+                    input(ng-model="items.firstname", data-ng-required="true", name="firstname", placeholder='FirstName', md-maxlength="30", required)
+                    div(ng-messages="validate.firstname.$error")
+                        h6(ng-message="required") 必ず入力してください.
+                        h6(ng-message="md-maxlength") もうすこし短くしてください.
+
+                md-input-container(flex)
+                    label Last Name
+                    input(ng-model="items.lastname", data-ng-required="true", name="lastname", placeholder='LastName', md-maxlength="30", required)
+                    div(ng-messages="validate.lastname.$error")
                         h6(ng-message="required") 必ず入力してください.
                         h6(ng-message="md-maxlength") もうすこし短くしてください.
 
             div(layout="row", layout-align="start center")
                 ng-md-icon.iconfill-blue(icon="account_circle", size="46")
                 md-input-container(flex)
-                    label カナ
-                    input(ng-model="items.kana", ng-pattern="/^[ぁ-んァ-ン s]+$/", data-ng-required="true", name="kana", placeholder='Enter Kana', md-maxlength="30", required)
-                    div(ng-messages="validate.kana.$error")
+                    label ミョウジ
+                    input(ng-model="items.firstkana", ng-pattern="/^[ぁ-んァ-ン s]+$/", data-ng-required="true", name="firstkana", placeholder='ミョウジ', md-maxlength="30", required)
+                    div(ng-messages="validate.firstkana.$error")
+                        h6(ng-message="required") 必ず入力してください.
+                        h6(ng-message="md-maxlength") もうすこし短くしてください.
+                        h6(ng-message="pattern") カナで入力してください.
+
+                md-input-container(flex)
+                    label ナマエ
+                    input(ng-model="items.lastkana", ng-pattern="/^[ぁ-んァ-ン s]+$/", data-ng-required="true", name="lastkana", placeholder='ナマエ', md-maxlength="30", required)
+                    div(ng-messages="validate.lastkana.$error")
                         h6(ng-message="required") 必ず入力してください.
                         h6(ng-message="md-maxlength") もうすこし短くしてください.
                         h6(ng-message="pattern") カナで入力してください.
