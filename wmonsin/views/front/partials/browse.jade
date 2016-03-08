@@ -43,14 +43,14 @@ md-content.background
                             md-checkbox.md-primary(ng-model="content.model", ng-if="content.type == 'check'", md-no-ink aria-label="Checkbox No Ink")
                                 .md-display-1(ng-bind="content.label")
 
-                            md-button.md-raised(flex, ng-if="content.type == 'button' && content.validate", ng-class="content.class", ng-click="next(content.path)", aria-label="", ng-disabled="validate.$invalid", ng-bind="content.label")
-                            md-button.md-raised(flex, ng-if="content.type == 'button' && !content.validate", ng-class="content.class", ng-click="next(content.path)", aria-label="", ng-bind="content.label")
+                            md-button.md-raised(flex, style="font-size:36px;padding:10px;", ng-if="content.type == 'button' && content.validate", ng-class="content.class", ng-click="next(content.path)", aria-label="", ng-disabled="validate.$invalid", ng-bind="content.label")
+                            md-button.md-raised(flex, style="font-size:36px;padding:10px;", ng-if="content.type == 'button' && !content.validate", ng-class="content.class", ng-click="next(content.path)", aria-label="", ng-bind="content.label")
 
                             div(layout="column", flex, ng-if="content.type == 'numeric'")
                                 div(layout="row",flex)
                                     md-input-container(style="width:100%")
                                         label(ng-bind="content.label")
-                                        input(ng-model="content.model", placeholder="",name="{{content.name}}",ng-pattern="/^[0-9]+\.[0-9]+$/", md-maxlength="30", required)
+                                        input(ng-model="content.model", placeholder="",name="{{content.name}}",ng-pattern="/^[0-9]+\.*[0-9]*$/", md-maxlength="30", required)
 
                                 div(layout="row",layout-align="center center", flex)
                                     div(layout="column",layout-align="center center", flex="80")
