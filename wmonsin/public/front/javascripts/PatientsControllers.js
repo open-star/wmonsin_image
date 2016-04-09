@@ -38,7 +38,7 @@ var Browser = (function () {
         }
     }
     return Browser;
-})();
+}());
 controllers.value('Global', {
     socket: null
 });

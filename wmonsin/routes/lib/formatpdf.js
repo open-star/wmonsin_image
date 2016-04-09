@@ -14,8 +14,8 @@ var FormatPDF = (function () {
         this.pagehight = 0;
         this.originx = 40;
         this.originy = 40;
-        this.nameboxwidth = 200;
-        this.valueboxwidth = 300;
+        this.nameboxwidth = 250;
+        this.valueboxwidth = 250;
         this.boxhight = 20;
         this.stringoffsetx = 3;
         this.stringoffsety = 2;
@@ -24,8 +24,8 @@ var FormatPDF = (function () {
         this.pagehight = 660;
         this.originx = 40;
         this.originy = 40;
-        this.nameboxwidth = 200;
-        this.valueboxwidth = 300;
+        this.nameboxwidth = 250;
+        this.valueboxwidth = 250;
         this.boxhight = 20;
         this.stringoffsetx = 3;
         this.stringoffsety = 2;
@@ -42,13 +42,14 @@ var FormatPDF = (function () {
         this.doc.info['Author'] = 'WMONSIN';
         this.doc.info['Subject'] = patient.Information.kana;
         this.originy += 20;
-        this.TextBox("かな", patient.Information.kana);
+        this.TextBox("カナ", patient.Information.kana);
         this.originy += 20;
         this.TextBox("氏名", patient.Information.name);
         this.originy += 20;
-        var date = patient.Date.getFullYear() + "/" + (patient.Date.getMonth() + 1) + "/" + patient.Date.getDate();
-        var time = patient.Date.getHours() + ":" + patient.Date.getMinutes() + ":" + patient.Date.getSeconds();
-        this.TextBox("日時", date + " " + time);
+        //  var date = patient.Date.getFullYear() + "/" + (patient.Date.getMonth() + 1) + "/" + patient.Date.getDate();
+        //  var time = patient.Date.getHours() + ":" + patient.Date.getMinutes() + ":" + patient.Date.getSeconds();
+        //  this.TextBox("日時", date + " " + time);
+        this.TextBox("日時", patient.Date.toLocaleString());
         _.each(patient.Input, function (item) {
             switch (item.type) {
                 case "text":
@@ -82,6 +83,6 @@ var FormatPDF = (function () {
         return this.doc;
     };
     return FormatPDF;
-})();
+}());
 module.exports = FormatPDF;
 //# sourceMappingURL=formatpdf.js.map
