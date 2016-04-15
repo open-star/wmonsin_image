@@ -36,20 +36,24 @@ var FormatPDF = (function () {
         this.doc.rect(this.originx + this.nameboxwidth, this.originy, this.valueboxwidth, this.boxhight);
         this.doc.font(this.font).fontSize(12).text(value, this.originx + this.stringoffsetx + this.nameboxwidth, this.originy + this.stringoffsety);
     };
-    FormatPDF.prototype.write = function (patient) {
+    FormatPDF.prototype.write = function (patient, user) {
         var _this = this;
         this.doc.info['Title'] = patient.Information.name;
         this.doc.info['Author'] = 'WMONSIN';
         this.doc.info['Subject'] = patient.Information.kana;
         this.originy += 20;
+        this.TextBox("ユーザ", user.username);
+        this.originy += 20;
+        this.TextBox("タイプ", user.type);
+        this.originy += 20;
         this.TextBox("カナ", patient.Information.kana);
         this.originy += 20;
         this.TextBox("氏名", patient.Information.name);
         this.originy += 20;
-        //  var date = patient.Date.getFullYear() + "/" + (patient.Date.getMonth() + 1) + "/" + patient.Date.getDate();
-        //  var time = patient.Date.getHours() + ":" + patient.Date.getMinutes() + ":" + patient.Date.getSeconds();
-        //  this.TextBox("日時", date + " " + time);
-        this.TextBox("日時", patient.Date.toLocaleString());
+        var date = patient.Date.getFullYear() + "/" + (patient.Date.getMonth() + 1) + "/" + patient.Date.getDate();
+        var time = patient.Date.getHours() + ":" + patient.Date.getMinutes() + ":" + patient.Date.getSeconds();
+        this.TextBox("日時", date + " " + time);
+        //    this.TextBox("日時", patient.Date.toLocaleString());
         _.each(patient.Input, function (item) {
             switch (item.type) {
                 case "text":

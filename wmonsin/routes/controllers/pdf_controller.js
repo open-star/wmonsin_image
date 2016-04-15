@@ -26,7 +26,7 @@ var PdfController = (function () {
                 if (!error) {
                     if (patient) {
                         var format = new formatpdf;
-                        var doc = format.write(patient);
+                        var doc = format.write(patient, request.user);
                         doc.write('public/output/output.pdf', function () {
                             var responsePDF = fs.createReadStream('public/output/output.pdf');
                             responsePDF.pipe(response);
@@ -50,6 +50,6 @@ var PdfController = (function () {
         }
     };
     return PdfController;
-})();
+}());
 module.exports = PdfController;
 //# sourceMappingURL=pdf_controller.js.map
